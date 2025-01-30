@@ -7,7 +7,10 @@ export default function Home() {
    <main>
     <Navbar />
     <div className="text-4xl">
-      Home page
+      Inshallah
+      Astafrallah
+      Bismillah
+      Alhamdulillah
     </div>
 
    </main>
