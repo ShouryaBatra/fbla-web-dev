@@ -7,10 +7,9 @@ export default function Home() {
    <main>
     <Navbar />
     <div className="text-4xl">
-      Inshallah
-      Astafrallah
-      Bismillah
-      Alhamdulillah
+      <a href="/really-important-page">
+        Click Me!
+      </a>
     </div>
 
    </main>
