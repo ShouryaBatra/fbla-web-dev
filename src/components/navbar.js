@@ -19,7 +19,7 @@ const Navbar = () => {
                 <Link href="/register" className="font-semibold hover:text-green-600 ease-linear duration-150">
                     Register
                 </Link>
-            </div>
+            </div> 
         </nav>
     );
 };
