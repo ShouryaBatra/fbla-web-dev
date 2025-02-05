@@ -17,6 +17,7 @@ export default function Login() {
                 type="email"
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600"
                 placeholder="Enter your email"
+                required
               />
             </div>
             <div>
@@ -27,6 +28,7 @@ export default function Login() {
                 type="password"
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600"
                 placeholder="Enter your password"
+                required
               />
             </div>
             <div className="flex justify-between items-center">

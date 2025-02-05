@@ -36,6 +36,7 @@ export default function Register() {
                 type="text"
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600"
                 placeholder="Enter your name"
+                required
               />
             </div>
             <div>
@@ -44,6 +45,7 @@ export default function Register() {
                 type="email"
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600"
                 placeholder="Enter your email"
+                required
               />
             </div>
             <div>
@@ -54,6 +56,7 @@ export default function Register() {
                 type="password"
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600"
                 placeholder="Enter your password"
+                required
               />
             </div>
             <button className="w-full bg-teal-700 text-white py-2 rounded-lg hover:bg-teal-800 transition">
