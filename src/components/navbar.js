@@ -33,21 +33,27 @@ const Navbar = () => {
           href="/postings"
           className=" hover:text-green-600 font-semibold ease-linear duration-150 "
         >
-          Postings
+          <p className="transition duration-300 hover:text-cream-white hover:scale-[1.05]">
+            Postings
+          </p>
         </Link>
         {user ? (
           <button
             onClick={handleLogout}
             className=" hover:text-green-600 font-semibold ease-linear duration-150 "
           >
-            Log Out
+            <p className="transition duration-300 hover:text-cream-white hover:scale-[1.05]">
+              Log Out
+            </p>
           </button>
         ) : (
           <Link
             href="/register"
             className="font-semibold hover:text-green-600 ease-linear duration-150"
           >
-            Register
+            <p className="transition duration-300 hover:text-cream-white hover:scale-[1.05]">
+              Register
+            </p>
           </Link>
         )}
       </div>
