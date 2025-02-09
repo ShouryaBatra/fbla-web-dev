@@ -4,6 +4,7 @@ import { useState } from "react";
 
 export default function Register() {
   const [role, setRole] = useState("");
+  const [grade, setGrade] = useState("");
 
   return (
     <main className="flex flex-col min-h-screen bg-white">
@@ -28,6 +29,23 @@ export default function Register() {
                 <option value="student">Student</option>
                 <option value="employer">Employer</option>
                 <option value="admin">Admin</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-gray-700 font-medium">Grade</label>
+              <select
+                value={grade}
+                onChange={(e) => setGrade(e.target.value)}
+                className="w-full px-2 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600 "
+                required
+              >
+                <option value="" disabled hidden>
+                  Choose your grade
+                </option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
               </select>
             </div>
             <div>
