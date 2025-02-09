@@ -16,12 +16,7 @@ const Navbar = () => {
         >
           Postings
         </Link>
-        <Link
-          href="/login"
-          className=" font-semibold hover:text-green-600 ease-linear duration-150"
-        >
-          Login
-        </Link>
+
         <Link
           href="/register"
           className="font-semibold hover:text-green-600 ease-linear duration-150"
