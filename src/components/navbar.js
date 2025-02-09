@@ -48,11 +48,11 @@ const Navbar = () => {
           </button>
         ) : (
           <Link
-            href="/register"
+            href="/login"
             className="font-semibold hover:text-green-600 ease-linear duration-150"
           >
             <p className="transition duration-300 hover:text-cream-white hover:scale-[1.05]">
-              Register
+              Login
             </p>
           </Link>
         )}
