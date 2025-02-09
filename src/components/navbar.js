@@ -1,7 +1,26 @@
 import Link from "next/link";
 import React from "react";
+import { useEffect, useState } from "react";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { app } from "../../config/firebase";
+
+const auth = getAuth(app);
 
 const Navbar = () => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser); // Set user state
+    });
+    return () => unsubscribe(); // Cleanup listener
+  }, []);
+
+  const handleLogout = async () => {
+    await signOut(auth);
+    setUser(null); // Reset user state after logging out
+  };
+
   return (
     <nav className="flex items-center justify-between flex-wrap p-4 sticky bg-dark-green">
       <div className="flex items-center flex-shrink-0 mr-6 text-xl text-cream">
@@ -16,18 +35,21 @@ const Navbar = () => {
         >
           Postings
         </Link>
-        <Link
-          href="/login"
-          className=" font-semibold hover:text-green-600 ease-linear duration-150"
-        >
-          Login
-        </Link>
-        <Link
-          href="/register"
-          className="font-semibold hover:text-green-600 ease-linear duration-150"
-        >
-          Register
-        </Link>
+        {user ? (
+          <button
+            onClick={handleLogout}
+            className=" hover:text-green-600 font-semibold ease-linear duration-150 "
+          >
+            Log Out
+          </button>
+        ) : (
+          <Link
+            href="/register"
+            className="font-semibold hover:text-green-600 ease-linear duration-150"
+          >
+            Register
+          </Link>
+        )}
       </div>
     </nav>
   );
