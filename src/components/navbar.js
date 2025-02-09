@@ -19,6 +19,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     await signOut(auth);
     setUser(null); // Reset user state after logging out
+    window.location.href = "/";
   };
 
   return (
