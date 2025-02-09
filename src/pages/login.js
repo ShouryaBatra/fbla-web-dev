@@ -1,5 +1,6 @@
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
+import Link from "next/link";
 
 export default function Login() {
   return (
@@ -40,6 +41,12 @@ export default function Login() {
               Login
             </button>
           </form>
+          <p className="text-center text-gray-700 mt-4">
+            Don't have an account?{" "}
+            <Link href="/register" className="text-teal-600 hover:underline">
+              Register
+            </Link>
+          </p>
         </div>
       </div>
       <Footer />

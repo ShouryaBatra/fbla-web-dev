@@ -4,6 +4,7 @@ import { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { app } from "../../config/firebase";
+import Link from "next/link";
 
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -120,6 +121,12 @@ export default function Register() {
               Register
             </button>
           </form>
+          <p className="text-center text-gray-700 mt-4">
+            Already have an account?{" "}
+            <Link href="/login" className="text-teal-600 hover:underline">
+              Login
+            </Link>
+          </p>
         </div>
       </div>
       <Footer />
