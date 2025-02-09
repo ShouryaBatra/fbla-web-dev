@@ -2,8 +2,21 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import Link from "next/link";
 import SpeedoMeter from "@/components/SpeedoMeter";
+import { useEffect, useState } from "react";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { app } from "../../config/firebase";
+
+const auth = getAuth(app);
 
 export default function Home() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser); // Set user state
+    });
+    return () => unsubscribe(); // Cleanup listener
+  }, []);
   return (
     <>
       <main className="flex flex-col min-h-screen bg-cream-white">
@@ -17,12 +30,21 @@ export default function Home() {
               Helping students at Homestead High School connect with employers
               and explore career opportunities.
             </p>
-            <Link
-              href="/register"
-              className="mt-6 inline-block bg-white text-dark-green px-6 py-3 text-lg font-semibold rounded-lg shadow-md hover:bg-cream transition"
-            >
-              Sign Up Now
-            </Link>
+            {!user ? (
+              <Link
+                href="/register"
+                className="mt-6 inline-block bg-white text-dark-green px-6 py-3 text-lg font-semibold rounded-lg shadow-md hover:bg-cream transition"
+              >
+                Sign Up Now
+              </Link>
+            ) : (
+              <Link
+                href="/register"
+                className="mt-6 inline-block bg-white text-dark-green px-6 py-3 text-lg font-semibold rounded-lg shadow-md hover:bg-cream transition"
+              >
+                View Open Positions
+              </Link>
+            )}
           </div>
         </section>
 
