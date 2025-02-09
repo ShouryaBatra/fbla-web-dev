@@ -1,10 +1,40 @@
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { useState } from "react";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { app } from "../../config/firebase";
+
+const auth = getAuth(app);
+const db = getFirestore(app);
 
 export default function Register() {
   const [role, setRole] = useState("");
   const [grade, setGrade] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      await setDoc(doc(db, "users", user.uid), {
+        role,
+        grade,
+        name,
+        email,
+      });
+      window.location.href = "/";
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
     <main className="flex flex-col min-h-screen bg-white">
@@ -14,7 +44,7 @@ export default function Register() {
           <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">
             Register
           </h2>
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleRegister}>
             <div>
               <label className="block text-gray-700 font-medium">Role</label>
               <select
@@ -52,6 +82,8 @@ export default function Register() {
               <label className="block text-gray-700 font-medium">Name</label>
               <input
                 type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600"
                 placeholder="Enter your name"
                 required
@@ -61,6 +93,8 @@ export default function Register() {
               <label className="block text-gray-700 font-medium">Email</label>
               <input
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600"
                 placeholder="Enter your email"
                 required
@@ -72,12 +106,17 @@ export default function Register() {
               </label>
               <input
                 type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600"
                 placeholder="Enter your password"
                 required
               />
             </div>
-            <button className="w-full bg-teal-700 text-white py-2 rounded-lg hover:bg-teal-800 transition">
+            <button
+              type="submit"
+              className="w-full bg-teal-700 text-white py-2 rounded-lg hover:bg-teal-800 transition"
+            >
               Register
             </button>
           </form>
