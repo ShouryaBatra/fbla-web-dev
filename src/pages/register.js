@@ -25,12 +25,18 @@ export default function Register() {
         password
       );
       const user = userCredential.user;
-      await setDoc(doc(db, "users", user.uid), {
+
+      const userData = {
         role,
-        grade,
         name,
         email,
-      });
+      };
+
+      if (role === "student") {
+        userData.grade = grade;
+      }
+
+      await setDoc(doc(db, "users", user.uid), userData);
       window.location.href = "/";
     } catch (error) {
       alert(error.message);
@@ -51,7 +57,7 @@ export default function Register() {
               <select
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
-                className="w-full px-2 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600 "
+                className="w-full px-2 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600"
                 required
               >
                 <option value="" disabled hidden>
@@ -62,23 +68,25 @@ export default function Register() {
                 <option value="admin">Admin</option>
               </select>
             </div>
-            <div>
-              <label className="block text-gray-700 font-medium">Grade</label>
-              <select
-                value={grade}
-                onChange={(e) => setGrade(e.target.value)}
-                className="w-full px-2 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600 "
-                required
-              >
-                <option value="" disabled hidden>
-                  Choose your grade
-                </option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-              </select>
-            </div>
+            {role === "student" && (
+              <div>
+                <label className="block text-gray-700 font-medium">Grade</label>
+                <select
+                  value={grade}
+                  onChange={(e) => setGrade(e.target.value)}
+                  className="w-full px-2 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600"
+                  required
+                >
+                  <option value="" disabled hidden>
+                    Choose your grade
+                  </option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                </select>
+              </div>
+            )}
             <div>
               <label className="block text-gray-700 font-medium">Name</label>
               <input
