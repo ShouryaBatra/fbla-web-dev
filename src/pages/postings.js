@@ -31,9 +31,9 @@ export default function Postings() {
     <>
       <main className="flex flex-col min-h-screen bg-cream-white">
         <Navbar />
-        <section className="max-w-7xl mx-auto py-16 px-6 flex gap-6">
+        <section className="max-w-7xl mx-auto py-16 px-6 flex gap-6 ">
           {/* Job Listings */}
-          <div className="w-2/5 overflow-y-auto max-h-[80vh] border-r border-gray-300 p-5">
+          <div className="w-auto overflow-y-auto max-h-[80vh] border-r border-gray-300 p-5">
             <h1 className="text-3xl font-bold text-dark-green mb-6">
               Explore Job Opportunities
             </h1>
@@ -87,9 +87,16 @@ export default function Postings() {
                 </ul>
               </>
             ) : (
-              <p className="text-gray-500 text-lg text-center">
-                Select a job to view details
-              </p>
+              <div>
+                <p className="text-gray-500 text-lg text-center">
+                  Select a job to view details
+                </p>
+                <p className="text-white">
+                  Select a job to view details Select a job to view details
+                  Select a job to view details Select a job to view details
+                  Select a job to view details
+                </p>
+              </div>
             )}
           </div>
         </section>
