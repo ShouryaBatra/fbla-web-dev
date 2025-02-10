@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { app } from "../../config/firebase";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
 const db = getFirestore(app);
+const auth = getAuth(app);
 
 export default function Postings() {
   const [postings, setPostings] = useState([]);
   const [selectedJob, setSelectedJob] = useState(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const fetchPostings = async () => {
@@ -25,6 +28,13 @@ export default function Postings() {
     };
 
     fetchPostings();
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
   }, []);
 
   return (
@@ -85,6 +95,11 @@ export default function Postings() {
                     <li key={index}>{skill}</li>
                   ))}
                 </ul>
+                {user && (
+                  <button className="mt-6 px-6 py-3 bg-dark-green text-white text-lg font-semibold rounded-lg shadow-md hover:scale-105 transition">
+                    Apply Now
+                  </button>
+                )}
               </>
             ) : (
               <div>
@@ -94,7 +109,6 @@ export default function Postings() {
                 <p className="text-white">
                   Select a job to view details Select a job to view details
                   Select a job to view details Select a job to view details
-                  Select a job to view details
                 </p>
               </div>
             )}
