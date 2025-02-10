@@ -33,11 +33,11 @@ export default function Postings() {
         <Navbar />
         <section className="max-w-7xl mx-auto py-16 px-6 flex gap-6">
           {/* Job Listings */}
-          <div className="w-2/5 overflow-y-auto max-h-[80vh] border-r border-gray-300 pr-6">
+          <div className="w-2/5 overflow-y-auto max-h-[80vh] border-r border-gray-300 p-5">
             <h1 className="text-3xl font-bold text-dark-green mb-6">
               Explore Job Opportunities
             </h1>
-            <div className="flex flex-col gap-4 p-5">
+            <div className="flex flex-col gap-4 ">
               {postings.map((job) => (
                 <div
                   key={job.id}
