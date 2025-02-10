@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import { app } from "../../config/firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Navbar from "@/components/navbar";
@@ -16,7 +22,11 @@ export default function Postings() {
   useEffect(() => {
     const fetchPostings = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, "postings"));
+        const q = query(
+          collection(db, "postings"),
+          where("approved", "==", true)
+        ); // Fetch only approved jobs
+        const querySnapshot = await getDocs(q);
         const jobs = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),

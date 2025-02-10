@@ -41,7 +41,7 @@ const Navbar = () => {
   return (
     <div className="mb-12">
       <nav className="flex items-center justify-between flex-wrap pb-1 fixed w-full h-20 bg-dark-green">
-        <div className="flex items-center flex-shrink-0 mr-6 text-xl text-cream">
+        <div className="flex items-center flex-shrink-0 mr-6 text-xl text-cream transition duration-300 hover:scale-105">
           <Image
             src={logo}
             alt="logo"
@@ -50,7 +50,7 @@ const Navbar = () => {
             className="ml-[-20px]"
           />
           <Link href="/" className="font-semibold tracking-tight text-2xl">
-            <p className="ml-[-20px]">Homestead Careers</p>
+            <p className="ml-[-20px] ">Homestead Careers</p>
           </Link>
         </div>
         <div className="ml-auto flex space-x-10 mr-8 text-lg text-cream">
