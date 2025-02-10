@@ -12,6 +12,7 @@ const db = getFirestore(app);
 const Navbar = () => {
   const [user, setUser] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isEmployer, setIsEmployer] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -20,12 +21,14 @@ const Navbar = () => {
         const userDoc = await getDoc(doc(db, "users", currentUser.uid));
         if (userDoc.exists() && userDoc.data().role === "admin") {
           setIsAdmin(true);
-        } else {
+        } else if (userDoc.exists() && userDoc.data().role === "employer") {
+          setIsEmployer(true);
           setIsAdmin(false);
         }
       } else {
         setUser(null);
         setIsAdmin(false);
+        setIsEmployer(false);
       }
     });
     return () => unsubscribe();
@@ -54,6 +57,17 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="ml-auto flex space-x-10 mr-8 text-lg text-cream">
+          {isEmployer && (
+            <Link
+              href="/new-posting"
+              className="hover:text-green-600 font-semibold ease-linear duration-150"
+            >
+              <p className="transition duration-300 hover:text-cream-white hover:scale-[1.05]">
+                Create a posting
+              </p>
+            </Link>
+          )}
+
           <Link
             href="/postings"
             className="hover:text-green-600 font-semibold ease-linear duration-150"

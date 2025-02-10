@@ -119,6 +119,8 @@ export default function Postings() {
                 <p className="text-white">
                   Select a job to view details Select a job to view details
                   Select a job to view details Select a job to view details
+                  Select a job to view details Select a job to view details
+                  Select a job to view details Select a job to view details
                 </p>
               </div>
             )}

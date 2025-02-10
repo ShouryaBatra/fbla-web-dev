@@ -46,7 +46,7 @@ export default function Register() {
   return (
     <main className="flex flex-col min-h-screen bg-white">
       <Navbar />
-      <div className="flex flex-1 items-center justify-center mt-4">
+      <div className="flex flex-1 items-center justify-center my-24">
         <div className="bg-gray-100 p-8 rounded-2xl shadow-lg w-96">
           <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">
             Register
