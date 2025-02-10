@@ -97,24 +97,30 @@ export default function Admin() {
             <h2 className="text-2xl font-bold text-dark-green mb-4">
               Pending Approvals
             </h2>
-            <div className="flex flex-col gap-4">
-              {unapprovedPostings.map((job) => (
-                <div
-                  key={job.id}
-                  className={`bg-white p-4 rounded-lg shadow-md border cursor-pointer transition-transform hover:scale-105 ${
-                    selectedJob?.id === job.id ? "border-dark-green" : ""
-                  }`}
-                  onClick={() => setSelectedJob(job)}
-                >
-                  <h2 className="text-lg font-bold text-dark-green">
-                    {job.title}
-                  </h2>
-                  <p className="text-gray-700 text-sm mt-2">
-                    {job.description.substring(0, 100)}...
-                  </p>
-                </div>
-              ))}
-            </div>
+            {unapprovedPostings.length === 0 ? (
+              <p className="text-gray-500">
+                No pending job approvals at the moment.
+              </p>
+            ) : (
+              <div className="flex flex-col gap-4">
+                {unapprovedPostings.map((job) => (
+                  <div
+                    key={job.id}
+                    className={`bg-white p-4 rounded-lg shadow-md border cursor-pointer transition-transform hover:scale-105 ${
+                      selectedJob?.id === job.id ? "border-dark-green" : ""
+                    }`}
+                    onClick={() => setSelectedJob(job)}
+                  >
+                    <h2 className="text-lg font-bold text-dark-green">
+                      {job.title}
+                    </h2>
+                    <p className="text-gray-700 text-sm mt-2">
+                      {job.description.substring(0, 100)}...
+                    </p>
+                  </div>
+                ))}
+              </div>
+            )}
             <h2 className="text-2xl font-bold text-dark-green mb-4 mt-6">
               All Job Postings
             </h2>
@@ -185,9 +191,15 @@ export default function Admin() {
                 </div>
               </>
             ) : (
-              <p className="text-gray-500 text-lg text-center">
-                Select a job to view details
-              </p>
+              <div>
+                <p className="text-gray-500 text-lg text-center">
+                  Select a job to view details
+                </p>
+                <p className="text-white">
+                  Select a job to view details Select a job to view details
+                  Select a job to view details Select a job to view details{" "}
+                </p>
+              </div>
             )}
           </div>
         </section>
