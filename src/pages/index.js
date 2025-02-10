@@ -33,7 +33,7 @@ export default function Home() {
             {!user ? (
               <Link
                 href="/register"
-                className="mt-6 inline-block bg-white text-dark-green px-6 py-3 text-lg font-semibold rounded-lg shadow-md hover:bg-cream transition"
+                className="mt-6 inline-block bg-cream text-dark-green px-6 py-3 text-lg font-semibold rounded-lg shadow-md hover:bg-cream-white transition"
               >
                 Sign Up Now
               </Link>
