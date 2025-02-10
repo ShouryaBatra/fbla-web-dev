@@ -98,8 +98,8 @@ export default function Home() {
           <div className="max-w-4xl mx-auto mt-8 space-y-6">
             <div className="bg-white p-6 rounded-xl shadow-md transition duration-300 hover:bg-cream hover:scale-[1.05]">
               <p className="text-lg text-gray-700 ">
-                &quote;Homestead Careers helped me land my first internship! The
-                platform made it so easy to find opportunities.&quote;
+                &quot;Homestead Careers helped me land my first internship! The
+                platform made it so easy to find opportunities.&quot;
               </p>
               <p className="text-sm font-semibold text-dark-green mt-2">
                 - Alex M., Senior
@@ -107,8 +107,8 @@ export default function Home() {
             </div>
             <div className="bg-white p-6 rounded-xl shadow-md  transition duration-300 hover:bg-cream hover:scale-[1.05]">
               <p className="text-lg text-gray-700">
-                &quote;I never thought I&apos;d find a job while still in high school. This
-                site made it happen!&quote;
+                &quot;I never thought I&apos;d find a job while still in high school. This
+                site made it happen!&quot;
               </p>
               <p className="text-sm font-semibold text-dark-green mt-2">
                 - Sophia L., Junior

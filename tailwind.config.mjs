@@ -12,6 +12,7 @@ export default exports = {
         'cream-white': '#e2e4d8',
         'cream': '#f0f2e6',
         'dark-green': '#082d2d',
+        'aqua-green': '#188484',
 
         background: "var(--background)",
         foreground: "var(--foreground)",

@@ -3,6 +3,8 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { app } from "../../config/firebase";
+import Image from "next/image";
+import logo from "../assets/logo.png"
 
 const auth = getAuth(app);
 
@@ -23,13 +25,15 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="flex items-center justify-between flex-wrap p-4 sticky bg-dark-green">
+    <div className="mb-12">
+    <nav className="flex items-center justify-between flex-wrap pb-1 fixed w-full h-20 bg-dark-green mb-20">
       <div className="flex items-center flex-shrink-0 mr-6 text-xl text-cream">
-        <Link href="/" className="font-semibold tracking-tight ">
-          Logo
+        <Image src={logo} alt="logo" width={140} height={140} className="ml-[-20px]"/>
+        <Link href="/" className=" font-semibold tracking-tight text-2xl ">
+          <p className="ml-[-20px]">Homestead Careers</p>
         </Link>
       </div>
-      <div className="ml-auto flex space-x-10 mr-8 text-md text-cream ">
+      <div className="ml-auto flex space-x-10 mr-8 text-lg text-cream ">
         <Link
           href="/postings"
           className=" hover:text-green-600 font-semibold ease-linear duration-150 "
@@ -59,6 +63,7 @@ const Navbar = () => {
         )}
       </div>
     </nav>
+    </div>
   );
 };
 
