@@ -159,7 +159,7 @@ export default function NewPosting() {
                     <button
                       type="button"
                       onClick={() => handleRemoveResponsibility(index)}
-                      className="bg-red-500 text-white px-3 rounded-lg"
+                      className="bg-teal-700 text-white px-3 rounded-lg"
                     >
                       -
                     </button>
@@ -195,7 +195,7 @@ export default function NewPosting() {
                     <button
                       type="button"
                       onClick={() => handleRemoveSkill(index)}
-                      className="bg-red-500 text-white px-3 rounded-lg"
+                      className="bg-teal-700 text-white px-3 rounded-lg"
                     >
                       -
                     </button>
@@ -231,7 +231,7 @@ export default function NewPosting() {
                     <button
                       type="button"
                       onClick={() => handleRemoveQuestion(index)}
-                      className="bg-red-500 text-white px-3 rounded-lg"
+                      className="bg-teal-700 text-white px-3 rounded-lg"
                     >
                       -
                     </button>
