@@ -263,27 +263,35 @@ export default function NewPosting() {
           </h2>
           <div className="flex gap-6">
             <div className="w-1/2 space-y-4 overflow-y-auto max-h-[70vh] p-6">
-              {userPostings.map((post) => (
-                <div
-                  key={post.id}
-                  className={`bg-white p-4 shadow-md rounded-lg border cursor-pointer transition-transform hover:scale-105 ${
-                    selectedJob?.id === post.id ? "border-dark-green" : ""
-                  }`}
-                  onClick={() => setSelectedJob(post)}
-                >
-                  <h3 className="text-lg font-bold">{post.title}</h3>
-                  <p className="text-gray-600">
-                    {post.description.substring(0, 100)}...
-                  </p>
-                  <p
-                    className={`mt-2 font-medium ${
-                      post.approved ? "text-green-600" : "text-red-600"
-                    }`}
-                  >
-                    {post.approved ? "Approved" : "Pending Approval"}
-                  </p>
-                </div>
-              ))}
+              {userPostings.length == 0 ? (
+                <p className="text-gray-500 text-lg text-center ">
+                  Post a job to see jobs
+                </p>
+              ) : (
+                <>
+                  {userPostings.map((post) => (
+                    <div
+                      key={post.id}
+                      className={`bg-white p-4 shadow-md rounded-lg border cursor-pointer transition-transform hover:scale-105 ${
+                        selectedJob?.id === post.id ? "border-dark-green" : ""
+                      }`}
+                      onClick={() => setSelectedJob(post)}
+                    >
+                      <h3 className="text-lg font-bold">{post.title}</h3>
+                      <p className="text-gray-600">
+                        {post.description.substring(0, 100)}...
+                      </p>
+                      <p
+                        className={`mt-2 font-medium ${
+                          post.approved ? "text-green-600" : "text-red-600"
+                        }`}
+                      >
+                        {post.approved ? "Approved" : "Pending Approval"}
+                      </p>
+                    </div>
+                  ))}
+                </>
+              )}
             </div>
             {/* Side Panel for Selected Job */}
             <div className="w-1/2 bg-white p-6 rounded-lg shadow-md overflow-y-auto max-h-[70vh]">
