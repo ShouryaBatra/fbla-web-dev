@@ -173,6 +173,16 @@ export default function Admin() {
                     </li>
                   ))}
                 </ul>
+                <h3 className="text-lg font-bold text-dark-green mt-4">
+                  Application questions:
+                </h3>
+                <ul className="list-disc ml-5">
+                  {selectedJob.questions.map((item, index) => (
+                    <li key={index} className="text-gray-700">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
                 <div className="mt-4 flex gap-4">
                   {!selectedJob.approved && (
                     <button
