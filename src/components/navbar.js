@@ -57,7 +57,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="ml-auto flex space-x-10 mr-8 text-lg text-cream">
-          {isEmployer && (
+          {(isEmployer || isAdmin) && (
             <Link
               href="/new-posting"
               className="hover:text-green-600 font-semibold ease-linear duration-150"
