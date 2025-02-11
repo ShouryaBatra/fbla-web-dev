@@ -314,6 +314,13 @@ export default function NewPosting() {
                       <li key={index}>{skill}</li>
                     ))}
                   </ul>
+                  {/* Questions Section */}
+                  <h3 className="text-lg font-semibold mt-4">Questions:</h3>
+                  <ul className="list-disc list-inside text-gray-600 space-y-1">
+                    {selectedJob.questions.map((question, index) => (
+                      <li key={index}>{question}</li>
+                    ))}
+                  </ul>
                 </>
               ) : (
                 <p className="text-gray-500 text-lg text-center">
