@@ -106,7 +106,12 @@ export default function Postings() {
                   ))}
                 </ul>
                 {user && (
-                  <button className="mt-6 px-6 py-3 bg-dark-green text-white text-lg font-semibold rounded-lg shadow-md hover:scale-105 transition">
+                  <button
+                    className="mt-6 px-6 py-3 bg-dark-green text-white text-lg font-semibold rounded-lg shadow-md hover:scale-105 transition"
+                    onClick={() => {
+                      window.location.href = `/application?jobId=${selectedJob.id}`;
+                    }}
+                  >
                     Apply Now
                   </button>
                 )}
