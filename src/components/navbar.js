@@ -20,7 +20,7 @@ const Navbar = () => {
       if (currentUser) {
         const userDoc = await getDoc(doc(db, "users", currentUser.uid));
 
-        if(userDoc.exists()){
+        if (userDoc.exists()) {
           setUser(userDoc.data());
         }
         if (userDoc.exists() && userDoc.data().role === "admin") {
@@ -46,14 +46,13 @@ const Navbar = () => {
   };
 
   const formatName = (fullName) => {
-    if (!fullName) 
-      return "";
+    if (!fullName) return "";
 
     const nameParts = fullName.trim().split(" ");
     if (nameParts.length > 1) {
-      return `${nameParts[0]} ${nameParts[1][0]}.`; 
+      return `${nameParts[0]} ${nameParts[1][0]}.`;
     }
-    return nameParts[0]; 
+    return nameParts[0].charAt(0).toUpperCase() + nameParts[0].slice(1);
   };
 
   return (
