@@ -13,12 +13,16 @@ const Navbar = () => {
   const [user, setUser] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isEmployer, setIsEmployer] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
-        setUser(currentUser);
         const userDoc = await getDoc(doc(db, "users", currentUser.uid));
+
+        if(userDoc.exists()){
+          setUser(userDoc.data());
+        }
         if (userDoc.exists() && userDoc.data().role === "admin") {
           setIsAdmin(true);
         } else if (userDoc.exists() && userDoc.data().role === "employer") {
@@ -41,6 +45,17 @@ const Navbar = () => {
     window.location.href = "/";
   };
 
+  const formatName = (fullName) => {
+    if (!fullName) 
+      return "";
+
+    const nameParts = fullName.trim().split(" ");
+    if (nameParts.length > 1) {
+      return `${nameParts[0]} ${nameParts[1][0]}.`; 
+    }
+    return nameParts[0]; 
+  };
+
   return (
     <div className="mb-12">
       <nav className="flex items-center justify-between flex-wrap pb-1 fixed w-full h-20 bg-dark-green">
@@ -57,17 +72,6 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="ml-auto flex space-x-10 mr-8 text-lg text-cream">
-          {(isEmployer || isAdmin) && (
-            <Link
-              href="/new-posting"
-              className="hover:text-green-600 font-semibold ease-linear duration-150"
-            >
-              <p className="transition duration-300 hover:text-cream-white hover:scale-[1.05]">
-                Create a posting
-              </p>
-            </Link>
-          )}
-
           <Link
             href="/postings"
             className="hover:text-green-600 font-semibold ease-linear duration-150"
@@ -76,25 +80,49 @@ const Navbar = () => {
               Postings
             </p>
           </Link>
-          {isAdmin && (
-            <Link
-              href="/admin"
-              className="hover:text-green-600 font-semibold ease-linear duration-150"
-            >
-              <p className="transition duration-300 hover:text-cream-white hover:scale-[1.05]">
-                Admin
-              </p>
-            </Link>
-          )}
           {user ? (
-            <button
-              onClick={handleLogout}
-              className="hover:text-green-600 font-semibold ease-linear duration-150"
-            >
-              <p className="transition duration-300 hover:text-cream-white hover:scale-[1.05]">
-                Log Out
-              </p>
-            </button>
+            <div>
+              <button
+                onClick={() => setMenuOpen(!menuOpen)}
+                className="hover:text-green-600 font-semibold ease-linear duration-150"
+              >
+                <p className="transition duration-300 hover:text-cream-white hover:scale-[1.05] ">
+                  {formatName(user.name)}
+                </p>
+              </button>
+              {menuOpen && (
+                <div className="absolute right-0 mt-2 w-36 bg-white rounded-md shadow-lg py-2">
+                  <Link
+                    href="/profile"
+                    className="block w-full text-left px-4 py-1 text-gray-700 hover:bg-gray-100"
+                  >
+                    Profile
+                  </Link>
+                  {(isEmployer || isAdmin) && (
+                    <Link
+                      href="/new-posting"
+                      className="block w-full text-left px-4 py-1 text-gray-700 hover:bg-gray-100"
+                    >
+                      Create Postings
+                    </Link>
+                  )}
+                  {isAdmin && (
+                    <Link
+                      href="/admin"
+                      className="block w-full text-left px-4 py-1 text-gray-700 hover:bg-gray-100"
+                    >
+                      Admin Panel
+                    </Link>
+                  )}
+                  <button
+                    onClick={handleLogout}
+                    className="block w-full text-left px-4 py-1 text-gray-700 hover:bg-gray-100"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
           ) : (
             <Link
               href="/login"

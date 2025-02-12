@@ -19,6 +19,7 @@ const auth = getAuth(app);
 
 export default function Admin() {
   const [unapprovedPostings, setUnapprovedPostings] = useState([]);
+  const [approvedPostings, setApprovedPostings] = useState([]);
   const [allPostings, setAllPostings] = useState([]);
   const [selectedJob, setSelectedJob] = useState(null);
   const [user, setUser] = useState(null);
@@ -38,11 +39,15 @@ export default function Admin() {
           unapprovedSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
         );
 
-        const allQuery = collection(db, "postings");
-        const allSnapshot = await getDocs(allQuery);
-        setAllPostings(
-          allSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+        const approvedQuery = query(
+          collection(db, "postings"),
+          where("approved", "==", true)
         );
+        const approvedSnapshot = await getDocs(approvedQuery);
+        setApprovedPostings(
+          approvedSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+        );
+
 
         setLoading(false);
       } catch (error) {
@@ -122,10 +127,10 @@ export default function Admin() {
               </div>
             )}
             <h2 className="text-2xl font-bold text-dark-green mb-4 mt-6">
-              All Job Postings
+              Approved Job Postings
             </h2>
             <div className="flex flex-col gap-4">
-              {allPostings.map((job) => (
+              {approvedPostings.map((job) => (
                 <div
                   key={job.id}
                   className={`bg-white p-4 rounded-lg shadow-md border cursor-pointer transition-transform hover:scale-105 ${
