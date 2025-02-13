@@ -40,7 +40,7 @@ export default function Home() {
             ) : (
               <Link
                 href="/postings"
-                className="mt-6 inline-block bg-white text-dark-green px-6 py-3 text-lg font-semibold rounded-lg shadow-md hover:bg-cream transition"
+                className="mt-6 inline-block bg-cream text-dark-green px-6 py-3 text-lg font-semibold rounded-lg shadow-md hover:bg-cream-white transition"
               >
                 View Open Positions
               </Link>
@@ -57,8 +57,9 @@ export default function Home() {
             <p className="text-lg mt-4 text-gray-700">
               Homestead Careers is a platform built to connect students with job
               opportunities, internships, and employers looking for talent.
-              Whether you're a student looking for experience or an employer
-              wanting to recruit, we make the process simple and efficient.
+              Whether you&apos;re a student looking for experience or an
+              employer wanting to recruit, we make the process simple and
+              efficient.
             </p>
           </div>
         </section>
@@ -98,8 +99,8 @@ export default function Home() {
           <div className="max-w-4xl mx-auto mt-8 space-y-6">
             <div className="bg-white p-6 rounded-xl shadow-md transition duration-300 hover:bg-cream hover:scale-[1.05]">
               <p className="text-lg text-gray-700 ">
-                "Homestead Careers helped me land my first internship! The
-                platform made it so easy to find opportunities."
+                &quot;Homestead Careers helped me land my first internship! The
+                platform made it so easy to find opportunities.&quot;
               </p>
               <p className="text-sm font-semibold text-dark-green mt-2">
                 - Alex M., Senior
@@ -107,8 +108,8 @@ export default function Home() {
             </div>
             <div className="bg-white p-6 rounded-xl shadow-md  transition duration-300 hover:bg-cream hover:scale-[1.05]">
               <p className="text-lg text-gray-700">
-                "I never thought I'd find a job while still in high school. This
-                site made it happen!"
+                &quot;I never thought I&apos;d find a job while still in high
+                school. This site made it happen!&quot;
               </p>
               <p className="text-sm font-semibold text-dark-green mt-2">
                 - Sophia L., Junior
