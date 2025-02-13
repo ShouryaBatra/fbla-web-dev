@@ -33,7 +33,10 @@ export default function Profile() {
         const userSnap = await getDoc(userRef);
         if (userSnap.exists()) {
           setUserData(userSnap.data());
-          if (userSnap.data().role === "employer") {
+          if (
+            userSnap.data().role === "employer" ||
+            userSnap.data().role === "admin"
+          ) {
             fetchEmployerPostings(currentUser.uid);
           } else if (userSnap.data().role === "student") {
             fetchStudentApplications(currentUser.uid);
@@ -66,7 +69,20 @@ export default function Profile() {
       id: doc.id,
       ...doc.data(),
     }));
-    setApplications(apps);
+
+    // Fetch job titles for each application
+    const appsWithJobTitles = await Promise.all(
+      apps.map(async (app) => {
+        const jobRef = doc(db, "postings", app.jobId);
+        const jobSnap = await getDoc(jobRef);
+        if (jobSnap.exists()) {
+          return { ...app, jobTitle: jobSnap.data().title };
+        }
+        return app;
+      })
+    );
+
+    setApplications(appsWithJobTitles);
   };
 
   const fetchStudentApplications = async (userId) => {
@@ -144,6 +160,9 @@ export default function Profile() {
                   <h3 className="text-md font-bold text-dark-green">
                     {app.name}
                   </h3>
+                  <p className="text-gray-700 text-sm mt-2">
+                    Job: {app.jobTitle} {/* Display the job title here */}
+                  </p>
                   <p className="text-gray-700 text-sm mt-2">
                     Status: {app.status || "Waiting"}
                   </p>
