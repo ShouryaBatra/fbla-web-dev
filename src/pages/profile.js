@@ -255,7 +255,7 @@ export default function Profile() {
                         onClick={() =>
                           handleAcceptReject(selectedItem.id, "accepted")
                         }
-                        className="px-4 py-2 bg-green-500 text-white rounded-lg mr-2"
+                        className="px-4 py-2 bg-teal-600 text-white rounded-lg mr-2"
                       >
                         Accept
                       </button>
@@ -263,7 +263,7 @@ export default function Profile() {
                         onClick={() =>
                           handleAcceptReject(selectedItem.id, "rejected")
                         }
-                        className="px-4 py-2 bg-red-500 text-white rounded-lg"
+                        className="px-4 py-2 bg-teal-700 text-white rounded-lg"
                       >
                         Reject
                       </button>
