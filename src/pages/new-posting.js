@@ -111,7 +111,7 @@ export default function NewPosting() {
       <div className="flex justify-center items-center flex-grow">
         <section className="w-1/3 max-w-4xl py-10 px-6">
           {/* Job Form */}
-          <div className=" shadow-lg rounded-lg p-6 w-full bg-cream mt-4">
+          <div className=" shadow-lg rounded-lg p-6 w-full bg-white mt-4">
             <h2 className="text-3xl font-bold text-dark-green mb-6 text-center">
               Post a Job
             </h2>
@@ -139,7 +139,7 @@ export default function NewPosting() {
                 className="w-full px-4 py-2 border rounded-lg bg-gray-50"
                 required
               />
-  
+
               {/* Responsibilities */}
               <div>
                 <h3 className="text-lg font-semibold mb-2">Responsibilities</h3>
@@ -175,7 +175,7 @@ export default function NewPosting() {
                   Add Responsibility
                 </button>
               </div>
-  
+
               {/* Skills */}
               <div>
                 <h3 className="text-lg font-semibold mb-2">Required Skills</h3>
@@ -211,7 +211,7 @@ export default function NewPosting() {
                   Add Skill
                 </button>
               </div>
-  
+
               {/* Questions */}
               <div>
                 <h3 className="text-lg font-semibold mb-2">Questions</h3>
@@ -241,16 +241,16 @@ export default function NewPosting() {
                 ))}
                 <button
                   type="button"
-                  onClick={handleAddQuestion} 
+                  onClick={handleAddQuestion}
                   className="bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-teal-500 ease-linear duration-150"
                 >
                   Add Question
                 </button>
               </div>
-  
+
               <button
                 type="submit"
-                className="w-full mt-12 bg-dark-green text-white py-2 rounded-lg hover:bg-teal-800 ease-linear duration-150 "
+                className="w-full mt-12 bg-teal-700 text-white py-2 rounded-lg hover:bg-teal-800 ease-linear duration-150 "
               >
                 Post Job
               </button>
@@ -261,5 +261,4 @@ export default function NewPosting() {
       <Footer />
     </main>
   );
-  
 }
