@@ -293,6 +293,7 @@ export default function NewPosting() {
                 </>
               )}
             </div>
+            
             {/* Side Panel for Selected Job */}
             <div className="w-1/2 bg-white p-6 rounded-lg shadow-md overflow-y-auto max-h-[70vh]">
               {selectedJob ? (

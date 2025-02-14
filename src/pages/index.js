@@ -33,17 +33,18 @@ export default function Home() {
             {!user ? (
               <Link
                 href="/register"
-                className="mt-6 inline-block bg-cream text-dark-green px-6 py-3 text-lg font-semibold rounded-lg shadow-md hover:bg-cream-white transition"
+                className="mt-12 inline-block bg-teal-700 text-cream px-6 py-3 text-lg font-semibold rounded-lg shadow-md hover:bg-teal-600 ease-linear duration-200 transition"
               >
                 Sign Up Now
               </Link>
             ) : (
               <Link
                 href="/postings"
-                className="mt-6 inline-block bg-cream text-dark-green px-6 py-3 text-lg font-semibold rounded-lg shadow-md hover:bg-cream-white transition"
+                className="mt-12 inline-block bg-teal-700 text-cream px-6 py-3 text-lg font-semibold rounded-lg shadow-md hover:bg-teal-600 ease-linear duration-200 transition"
               >
                 View Open Positions
               </Link>
+
             )}
           </div>
         </section>

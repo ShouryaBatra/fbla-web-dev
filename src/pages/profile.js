@@ -128,72 +128,87 @@ export default function Profile() {
       <Navbar />
       <main className="max-w-7xl mx-auto py-16 px-6 flex gap-6">
         {/* Main Content */}
-        <div className="w-2/3">
+        <div className="w-2/3 mt-16">
           {userData?.role === "employer" || userData?.role === "admin" ? (
             <>
               <h1 className="text-3xl font-bold text-dark-green mb-6">
                 Your Job Postings
               </h1>
-              {postings.map((posting) => (
-                <div
-                  key={posting.id}
-                  className="bg-white p-4 rounded-lg shadow-md mb-4 cursor-pointer"
-                  onClick={() => setSelectedItem(posting)}
-                >
-                  <h2 className="text-lg font-bold text-dark-green">
-                    {posting.title}
-                  </h2>
-                  <p className="text-gray-700 text-sm mt-2">
-                    {posting.description.substring(0, 100)}...
-                  </p>
-                </div>
-              ))}
-              <h2 className="text-2xl font-bold text-dark-green mt-6">
-                Applications
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {postings.map((posting) => (
+                  <div
+                    key={posting.id}
+                    className="bg-white p-4 rounded-lg shadow-md cursor-pointer flex flex-col justify-between min-h-[140px] max-h-[140px] overflow-hidden"
+                    onClick={() => setSelectedItem(posting)}
+                  >
+                    <h2 className="text-lg font-bold text-dark-green truncate">
+                      {posting.title}
+                    </h2>
+                    <p
+                      className={`mt-0 font-medium flex flex-row ${
+                        posting.approved ? "text-green-600" : "text-red-600"
+                      }`}
+                    >
+                      <span className="text-dark-green mr-1">Status:</span>
+                      {posting.approved ? "Approved" : "Pending Approval"}
+                    </p>
+
+                    <p className="text-gray-700 text-sm line-clamp-2">
+                      {posting.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <h2 className="text-3xl font-bold text-dark-green mt-12 mb-6">
+                Pending Applications
               </h2>
-              {applications.map((app) => (
-                <div
-                  key={app.id}
-                  className="bg-white p-4 rounded-lg shadow-md mb-4 cursor-pointer"
-                  onClick={() => setSelectedItem(app)}
-                >
-                  <h3 className="text-md font-bold text-dark-green">
-                    {app.name}
-                  </h3>
-                  <p className="text-gray-700 text-sm mt-2">
-                    Job: {app.jobTitle} {/* Display the job title here */}
-                  </p>
-                  <p className="text-gray-700 text-sm mt-2">
-                    Status: {app.status || "Waiting"}
-                  </p>
-                </div>
-              ))}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {applications.map((app) => (
+                  <div
+                    key={app.id}
+                    className="bg-white p-4 rounded-lg shadow-md cursor-pointer flex flex-col justify-between min-h-[120px] max-h-[120px] overflow-hidden"
+                    onClick={() => setSelectedItem(app)}
+                  >
+                    <h3 className="text-md font-bold text-dark-green truncate">
+                      {app.name}
+                    </h3>
+                    <p className="text-gray-700 text-sm mt-2 truncate">
+                      Job: {app.jobTitle}
+                    </p>
+                    <p className="text-gray-700 text-sm mt-2">
+                      Status: {app.status || "Waiting"}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </>
           ) : (
             <>
               <h1 className="text-3xl font-bold text-dark-green mb-6">
                 Your Applications
               </h1>
-              {applications.map((app) => (
-                <div
-                  key={app.id}
-                  className="bg-white p-4 rounded-lg shadow-md mb-4 cursor-pointer"
-                  onClick={() => setSelectedItem(app)}
-                >
-                  <h2 className="text-lg font-bold text-dark-green">
-                    {app.jobTitle}
-                  </h2>
-                  <p className="text-gray-700 text-sm mt-2">
-                    Status: {app.status || "Waiting"}
-                  </p>
-                </div>
-              ))}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {applications.map((app) => (
+                  <div
+                    key={app.id}
+                    className="bg-white p-4 rounded-lg shadow-md cursor-pointer flex flex-col justify-between min-h-[120px] max-h-[120px] overflow-hidden"
+                    onClick={() => setSelectedItem(app)}
+                  >
+                    <h2 className="text-lg font-bold text-dark-green truncate">
+                      {app.jobTitle}
+                    </h2>
+                    <p className="text-gray-700 text-sm mt-2">
+                      Status: {app.status || "Waiting"}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </>
           )}
         </div>
 
         {/* Side Panel */}
-        <div className="w-1/3 bg-white p-6 rounded-lg shadow-md">
+        <div className="w-1/2 mt-28 bg-white p-6 rounded-lg shadow-md min-h-[540px] max-h-[540px] overflow-y-auto">
           {selectedItem && (
             <>
               {selectedItem.title ? (
@@ -223,39 +238,62 @@ export default function Profile() {
                       <li key={index}>{skill}</li>
                     ))}
                   </ul>
+
+                  <h3 className="text-lg font-semibold mt-4">Questions:</h3>
+                  <ul className="list-disc list-inside text-gray-600 space-y-1">
+                    {selectedItem.questions.map((question, index) => (
+                      <li key={index}>{question}</li>
+                    ))}
+                  </ul>
                 </>
               ) : (
                 <>
                   <h2 className="text-2xl font-bold text-dark-green">
                     {selectedItem.name}
                   </h2>
-                  <p className="text-gray-700 mt-4">
-                    Email: {selectedItem.email}
-                  </p>
-                  <p className="text-gray-700 mt-2">Age: {selectedItem.age}</p>
-                  <p className="text-gray-700 mt-2">
-                    Address: {selectedItem.address}
-                  </p>
-                  <p className="text-gray-700 mt-2">
-                    Phone: {selectedItem.phone}
-                  </p>
-                  <p className="text-gray-700 mt-2">
-                    Skills: {selectedItem.skills}
-                  </p>
-                  <h3 className="text-lg font-semibold mt-4">Answers:</h3>
-                  {Object.entries(selectedItem.answers).map(([key, value]) => (
-                    <p key={key} className="text-gray-700 mt-2">
-                      {value}
+                  <div className="text-lg">
+                    <p className="text-gray-700 mt-4 flex flex-row">
+                      <p className="font-semibold">Job</p>:{" "}
+                      {selectedItem.jobTitle}
                     </p>
-                  ))}
+                    <p className="text-gray-700 mt-4 flex flex-row">
+                      <p className="font-semibold">Email</p>:{" "}
+                      {selectedItem.email}
+                    </p>
+                    <p className="text-gray-700 mt-2 flex flex-row">
+                      <p className="font-semibold">Age</p>: {selectedItem.age}
+                    </p>
+                    <p className="text-gray-700 mt-2 flex flex-row">
+                      <p className="font-semibold">Address</p>:{" "}
+                      {selectedItem.address}
+                    </p>
+                    <p className="text-gray-700 mt-2 flex flex-row">
+                      <p className="font-semibold">Phone</p>:{" "}
+                      {selectedItem.phone}
+                    </p>
+                    <p className="text-gray-700 mt-2 flex flex-row">
+                      <p className="font-semibold">Skills</p>:{" "}
+                      {selectedItem.skills}
+                    </p>
+                  </div>
+                  <h3 className="text-lg font-semibold mt-4">Answers:</h3>
+                  <div className="max-h-[200px] overflow-y-auto">
+                    {Object.entries(selectedItem.answers).map(
+                      ([key, value]) => (
+                        <p key={key} className="text-gray-700 mt-2">
+                          {value}
+                        </p>
+                      )
+                    )}
+                  </div>
                   {(userData?.role === "employer" ||
                     userData?.role === "admin") && (
-                    <div className="mt-4">
+                    <div className="mt-4 flex gap-2">
                       <button
                         onClick={() =>
                           handleAcceptReject(selectedItem.id, "accepted")
                         }
-                        className="px-4 py-2 bg-teal-600 text-white rounded-lg mr-2"
+                        className="px-4 py-2 bg-teal-600 font-semibold text-white rounded-lg flex-1 hover:bg-teal-700 transition ease-linear duration-150"
                       >
                         Accept
                       </button>
@@ -263,7 +301,7 @@ export default function Profile() {
                         onClick={() =>
                           handleAcceptReject(selectedItem.id, "rejected")
                         }
-                        className="px-4 py-2 bg-teal-700 text-white rounded-lg"
+                        className="px-4 py-2 bg-teal-800 font-semibold text-white rounded-lg flex-1 hover:bg-teal-900 transition ease-linear duration-150"
                       >
                         Reject
                       </button>
