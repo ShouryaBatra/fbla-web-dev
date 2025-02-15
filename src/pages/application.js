@@ -115,8 +115,7 @@ export default function Application() {
         appliedAt: serverTimestamp(),
       });
 
-      alert("Application submitted successfully!");
-      router.push("/postings");
+      router.push("/profile");
     } catch (error) {
       console.error("Error submitting application: ", error);
       alert("Failed to submit application.");
