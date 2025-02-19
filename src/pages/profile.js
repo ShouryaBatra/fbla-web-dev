@@ -131,90 +131,109 @@ export default function Profile() {
   return (
     <div className="flex flex-col min-h-screen bg-cream-white">
       <Navbar />
-      <main className="max-w-7xl mx-auto py-16 px-6 flex gap-6">
-        {/* Main Content */}
-        <div className="w-2/3 mt-16">
+      <main className="max-w-7xl mx-auto py-16 px-6 flex gap-6 w-full">
+        {/* Left Panel */}
+        <div className="w-1/2 overflow-y-auto max-h-[80vh] p-5">
           {userData?.role === "employer" || userData?.role === "admin" ? (
-            <>
+            <div>
               <h1 className="text-3xl font-bold text-dark-green mb-6">
                 Your Job Postings
               </h1>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {postings.map((posting) => (
-                  <div
-                    key={posting.id}
-                    className="bg-white p-4 rounded-lg shadow-md cursor-pointer flex flex-col justify-between min-h-[140px] max-h-[140px] overflow-hidden"
-                    onClick={() => setSelectedItem(posting)}
-                  >
-                    <h2 className="text-lg font-bold text-dark-green truncate">
-                      {posting.title}
-                    </h2>
-                    <p
-                      className={`mt-0 font-medium flex flex-row ${
-                        posting.approved ? "text-green-600" : "text-red-600"
+              {postings.length === 0 ? (
+                <p className="text-gray-500">No job postings found.</p>
+              ) : (
+                <div className="grid grid-cols-1 gap-4">
+                  {postings.map((posting) => (
+                    <div
+                      key={posting.id}
+                      className={`bg-white p-4 rounded-lg shadow-md border cursor-pointer transition-transform hover:scale-105 ${
+                        selectedItem?.id === posting.id
+                          ? "border-dark-green"
+                          : ""
                       }`}
+                      onClick={() => setSelectedItem(posting)}
                     >
-                      <span className="text-dark-green mr-1">Status:</span>
-                      {posting.approved ? "Approved" : "Pending Approval"}
-                    </p>
+                      <h2 className="text-lg font-bold text-dark-green">
+                        {posting.title}
+                      </h2>
+                      <p className="text-gray-700 text-sm mt-2">
+                        {posting.description.substring(0, 100)}...
+                      </p>
+                      <p
+                        className={`mt-2 font-medium ${
+                          posting.approved ? "text-green-600" : "text-red-600"
+                        }`}
+                      >
+                        {posting.approved ? "Approved" : "Pending Approval"}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              )}
 
-                    <p className="text-gray-700 text-sm line-clamp-2">
-                      {posting.description}
-                    </p>
-                  </div>
-                ))}
-              </div>
-              <h2 className="text-3xl font-bold text-dark-green mt-12 mb-6">
+              <h2 className="text-2xl font-bold text-dark-green mt-6 mb-4">
                 Pending Applications
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {applications.map((app) => (
-                  <div
-                    key={app.id}
-                    className="bg-white p-4 rounded-lg shadow-md cursor-pointer flex flex-col justify-between min-h-[120px] max-h-[120px] overflow-hidden"
-                    onClick={() => setSelectedItem(app)}
-                  >
-                    <h3 className="text-md font-bold text-dark-green truncate">
-                      {app.name}
-                    </h3>
-                    <p className="text-gray-700 text-sm mt-2 truncate">
-                      Job: {app.jobTitle}
-                    </p>
-                    <p className="text-gray-700 text-sm mt-2">
-                      Status: {app.status || "Waiting"}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </>
+              {applications.length === 0 ? (
+                <p className="text-gray-500">No pending applications.</p>
+              ) : (
+                <div className="grid grid-cols-1 gap-4">
+                  {applications.map((app) => (
+                    <div
+                      key={app.id}
+                      className={`bg-white p-4 rounded-lg shadow-md border cursor-pointer transition-transform hover:scale-105 ${
+                        selectedItem?.id === app.id ? "border-dark-green" : ""
+                      }`}
+                      onClick={() => setSelectedItem(app)}
+                    >
+                      <h3 className="text-md font-bold text-dark-green truncate">
+                        {app.name}
+                      </h3>
+                      <p className="text-gray-700 text-sm mt-2 truncate">
+                        Job: {app.jobTitle}
+                      </p>
+                      <p className="text-gray-700 text-sm mt-2">
+                        Status: {app.status || "Waiting"}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           ) : (
             <>
               <h1 className="text-3xl font-bold text-dark-green mb-6">
                 Your Applications
               </h1>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {applications.map((app) => (
-                  <div
-                    key={app.id}
-                    className="bg-white p-4 rounded-lg shadow-md cursor-pointer flex flex-col justify-between min-h-[120px] max-h-[120px] overflow-hidden"
-                    onClick={() => setSelectedItem(app)}
-                  >
-                    <h2 className="text-lg font-bold text-dark-green truncate">
-                      {app.jobTitle}
-                    </h2>
-                    <p className="text-gray-700 text-sm mt-2">
-                      Status: {app.status || "Waiting"}
-                    </p>
-                  </div>
-                ))}
-              </div>
+              {applications.length === 0 ? (
+                <p className="text-gray-500">No applications found.</p>
+              ) : (
+                <div className="grid grid-cols-1 gap-4">
+                  {applications.map((app) => (
+                    <div
+                      key={app.id}
+                      className={`bg-white p-4 rounded-lg shadow-md border cursor-pointer transition-transform hover:scale-105 ${
+                        selectedItem?.id === app.id ? "border-dark-green" : ""
+                      }`}
+                      onClick={() => setSelectedItem(app)}
+                    >
+                      <h2 className="text-lg font-bold text-dark-green truncate">
+                        {app.jobTitle}
+                      </h2>
+                      <p className="text-gray-700 text-sm mt-2">
+                        Status: {app.status || "Waiting"}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              )}
             </>
           )}
         </div>
 
-        {/* Side Panel */}
-        <div className="w-1/2 mt-28 bg-white p-6 rounded-lg shadow-md min-h-[540px] max-h-[540px] overflow-y-auto">
-          {selectedItem && (
+        {/* Right Panel */}
+        <div className="w-1/2 bg-white p-6 rounded-lg shadow-md overflow-y-auto max-h-[80vh]">
+          {selectedItem ? (
             <>
               {selectedItem.title ? (
                 <>
@@ -227,27 +246,34 @@ export default function Profile() {
                   <p className="text-lg font-semibold text-dark-green mt-4">
                     Salary: ${selectedItem.salary}
                   </p>
-                  <h3 className="text-lg font-semibold mt-4">
+                  <h3 className="text-lg font-bold text-dark-green mt-4">
                     Responsibilities:
                   </h3>
-                  <ul className="list-disc list-inside text-gray-600 space-y-1">
+                  <ul className="list-disc ml-5">
                     {selectedItem.responsibilities.map((item, index) => (
-                      <li key={index}>{item}</li>
+                      <li key={index} className="text-gray-700">
+                        {item}
+                      </li>
                     ))}
                   </ul>
-                  <h3 className="text-lg font-semibold mt-4">
-                    Required Skills:
+                  <h3 className="text-lg font-bold text-dark-green mt-4">
+                    Skills Required:
                   </h3>
-                  <ul className="list-disc list-inside text-gray-600 space-y-1">
-                    {selectedItem.skills.map((skill, index) => (
-                      <li key={index}>{skill}</li>
+                  <ul className="list-disc ml-5">
+                    {selectedItem.skills.map((item, index) => (
+                      <li key={index} className="text-gray-700">
+                        {item}
+                      </li>
                     ))}
                   </ul>
-
-                  <h3 className="text-lg font-semibold mt-4">Questions:</h3>
-                  <ul className="list-disc list-inside text-gray-600 space-y-1">
-                    {selectedItem.questions.map((question, index) => (
-                      <li key={index}>{question}</li>
+                  <h3 className="text-lg font-bold text-dark-green mt-4">
+                    Application Questions:
+                  </h3>
+                  <ul className="list-disc ml-5">
+                    {selectedItem.questions.map((item, index) => (
+                      <li key={index} className="text-gray-700">
+                        {item}
+                      </li>
                     ))}
                   </ul>
                 </>
@@ -258,30 +284,33 @@ export default function Profile() {
                   </h2>
                   <div className="text-lg">
                     <p className="text-gray-700 mt-4 flex flex-row">
-                      <p className="font-semibold">Job</p>:{" "}
+                      <span className="font-semibold">Job:</span>{" "}
                       {selectedItem.jobTitle}
                     </p>
-                    <p className="text-gray-700 mt-4 flex flex-row">
-                      <p className="font-semibold">Email</p>:{" "}
+                    <p className="text-gray-700 mt-2 flex flex-row">
+                      <span className="font-semibold">Email:</span>{" "}
                       {selectedItem.email}
                     </p>
                     <p className="text-gray-700 mt-2 flex flex-row">
-                      <p className="font-semibold">Age</p>: {selectedItem.age}
+                      <span className="font-semibold">Age:</span>{" "}
+                      {selectedItem.age}
                     </p>
                     <p className="text-gray-700 mt-2 flex flex-row">
-                      <p className="font-semibold">Address</p>:{" "}
+                      <span className="font-semibold">Address:</span>{" "}
                       {selectedItem.address}
                     </p>
                     <p className="text-gray-700 mt-2 flex flex-row">
-                      <p className="font-semibold">Phone</p>:{" "}
+                      <span className="font-semibold">Phone:</span>{" "}
                       {selectedItem.phone}
                     </p>
                     <p className="text-gray-700 mt-2 flex flex-row">
-                      <p className="font-semibold">Skills</p>:{" "}
+                      <span className="font-semibold">Skills:</span>{" "}
                       {selectedItem.skills}
                     </p>
                   </div>
-                  <h3 className="text-lg font-semibold mt-4">Answers:</h3>
+                  <h3 className="text-lg font-bold text-dark-green mt-4">
+                    Answers:
+                  </h3>
                   <div className="max-h-[200px] overflow-y-auto">
                     {Object.entries(selectedItem.answers).map(
                       ([key, value]) => (
@@ -315,6 +344,10 @@ export default function Profile() {
                 </>
               )}
             </>
+          ) : (
+            <p className="text-gray-500 text-lg text-center">
+              Select a job or application to view details
+            </p>
           )}
         </div>
       </main>
