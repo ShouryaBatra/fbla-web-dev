@@ -36,6 +36,11 @@ export default function Register() {
         userData.grade = grade;
       }
 
+      // Initialize postings as an empty array for employers
+      if (role === "employer" || role === "admin") {
+        userData.postings = [];
+      }
+
       await setDoc(doc(db, "users", user.uid), userData);
       window.location.href = "/";
     } catch (error) {

@@ -60,6 +60,11 @@ export default function Profile() {
   };
 
   const fetchApplicationsForPostings = async (postingIds) => {
+    if (postingIds.length === 0) {
+      setApplications([]); // No postings, so no applications
+      return;
+    }
+
     const q = query(
       collection(db, "applications"),
       where("jobId", "in", postingIds)
