@@ -283,7 +283,7 @@ export default function Profile() {
               ) : (
                 <>
                   <h2 className="text-2xl font-bold text-dark-green">
-                    {selectedItem.name}
+                    {selectedItem.jobTitle}
                   </h2>
                   <div className="text-lg">
                     <p className="text-gray-700 mt-4 flex flex-row">
