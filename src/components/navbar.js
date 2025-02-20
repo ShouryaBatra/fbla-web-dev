@@ -64,7 +64,14 @@ const Navbar = () => {
           href="/"
           className="flex items-center flex-shrink-0 text-xl ml-[-10px] text-cream transition duration-300 hover:scale-105"
         >
-          <Image src={logo} alt="logo" width={140} height={140} />
+          <Image
+            src={logo}
+            alt="logo"
+            width={1000}
+            height={1000}
+            className="w-[120px] md:w-[140px] transition-all duration-300"
+          />
+
           <div className="font-semibold tracking-tight text-2xl hidden md:block">
             <p className="ml-[-20px]">Homestead Careers</p>
           </div>
