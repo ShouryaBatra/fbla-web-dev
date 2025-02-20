@@ -18,6 +18,8 @@ export default function Postings() {
   const [postings, setPostings] = useState([]);
   const [selectedJob, setSelectedJob] = useState(null);
   const [user, setUser] = useState(null);
+  const [expandedJobId, setExpandedJobId] = useState(null); // Track expanded job
+  const [isMobileView, setIsMobileView] = useState(false); // Initialize with a default value
 
   useEffect(() => {
     const fetchPostings = async () => {
@@ -47,25 +49,52 @@ export default function Postings() {
     return () => unsubscribe();
   }, []);
 
+  // Track window resize to update mobile view state
+  useEffect(() => {
+    // Ensure this runs only on the client side
+    if (typeof window !== "undefined") {
+      const handleResize = () => {
+        setIsMobileView(window.innerWidth < 1024);
+      };
+
+      // Set initial value
+      setIsMobileView(window.innerWidth < 1024);
+
+      // Add event listener for window resize
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }
+  }, []);
+
+  const toggleJobDetails = (jobId) => {
+    setExpandedJobId(expandedJobId === jobId ? null : jobId);
+  };
+
   return (
     <>
       <main className="flex flex-col min-h-screen bg-cream-white">
         <Navbar />
-        <section className="max-w-7xl mx-auto py-16 px-6 flex flex-col gap-6 ">
+        <section className="max-w-7xl mx-auto py-16 px-6 flex flex-col gap-6">
           <h1 className="text-4xl font-bold text-dark-green mb-6 mt-4 ml-6">
             Explore Job Opportunities
           </h1>
-          <div className=" flex flex-row max-w-full max-h-[650px]">
+          <div className="flex flex-col lg:flex-row max-w-full">
             {/* Job Listings */}
-            <div className="w-auto overflow-y-auto max-h-[80vh] border-r border-gray-300 p-5">
-              <div className="flex flex-col gap-4 ">
+            <div className="w-full lg:w-auto lg:overflow-y-auto lg:max-h-[80vh] lg:border-r lg:border-gray-300 p-5">
+              <div className="flex flex-col gap-4">
                 {postings.map((job) => (
                   <div
                     key={job.id}
-                    className={`bg-white p-4 rounded-xl shadow-md border cursor-pointer transition-transform hover:scale-105 ${
-                      selectedJob?.id === job.id ? "border-dark-green " : ""
+                    className={`bg-white p-4 rounded-xl shadow-md border cursor-pointer transition-transform ${
+                      selectedJob?.id === job.id ? "border-dark-green" : ""
                     }`}
-                    onClick={() => setSelectedJob(job)}
+                    onClick={() => {
+                      if (isMobileView) {
+                        toggleJobDetails(job.id); // Toggle job details on mobile
+                      } else {
+                        setSelectedJob(job); // Set selected job on desktop
+                      }
+                    }}
                   >
                     <h2 className="text-lg font-bold text-dark-green">
                       {job.title}
@@ -76,13 +105,73 @@ export default function Postings() {
                     <p className="text-md font-semibold text-dark-green mt-2">
                       Salary: ${job.salary}
                     </p>
+
+                    {/* Show "Show More" text on mobile */}
+                    {isMobileView && expandedJobId !== job.id && (
+                      <p
+                        className="text-blue-500 text-sm mt-2 cursor-pointer"
+                        onClick={(e) => {
+                          e.stopPropagation(); // Prevent card click event
+                          toggleJobDetails(job.id);
+                        }}
+                      >
+                        Show More
+                      </p>
+                    )}
+
+                    {/* Show job details if expanded on mobile */}
+                    {expandedJobId === job.id && (
+                      <div className="mt-4">
+                        <p className="text-gray-700">{job.description}</p>
+                        <p className="text-lg font-semibold text-dark-green mt-4">
+                          Salary: ${job.salary}/hr
+                        </p>
+                        <h3 className="text-lg font-semibold mt-4">
+                          Responsibilities:
+                        </h3>
+                        <ul className="list-disc list-inside text-gray-600 space-y-1">
+                          {job.responsibilities.map((item, index) => (
+                            <li key={index}>{item}</li>
+                          ))}
+                        </ul>
+                        <h3 className="text-lg font-semibold mt-4">
+                          Required Skills:
+                        </h3>
+                        <ul className="list-disc list-inside text-gray-600 space-y-1">
+                          {job.skills.map((skill, index) => (
+                            <li key={index}>{skill}</li>
+                          ))}
+                        </ul>
+                        {user && (
+                          <button
+                            className="mt-6 px-6 py-3 bg-teal-700 text-white text-lg font-semibold rounded-lg shadow-md hover:bg-teal-800 ease-linear duration-150 transition"
+                            onClick={() => {
+                              window.location.href = `/application?jobId=${job.id}`;
+                            }}
+                          >
+                            Apply Now
+                          </button>
+                        )}
+
+                        {/* Add "Hide" text */}
+                        <p
+                          className="text-blue-500 text-sm mt-4 cursor-pointer"
+                          onClick={(e) => {
+                            e.stopPropagation(); // Prevent card click event
+                            toggleJobDetails(job.id);
+                          }}
+                        >
+                          Hide
+                        </p>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Job Details */}
-            <div className=" bg-white p-6 rounded-xl shadow-md overflow-y-auto max-h-[80vh] w-[42rem] mt-4 ml-8 text-lg">
+            {/* Job Details (Desktop Only) */}
+            <div className="hidden lg:block bg-white p-6 rounded-xl shadow-md overflow-y-auto max-h-[80vh] w-[42rem] mt-4 ml-8 text-lg">
               {selectedJob ? (
                 <>
                   <h2 className="text-2xl font-bold text-dark-green">
