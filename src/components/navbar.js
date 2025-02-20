@@ -62,15 +62,9 @@ const Navbar = () => {
       <nav className="flex items-center justify-between flex-wrap pb-1 fixed w-full h-20 bg-dark-green">
         <Link
           href="/"
-          className="flex items-center flex-shrink-0 mr-6 text-xl text-cream transition duration-300 hover:scale-105"
+          className="flex items-center flex-shrink-0 text-xl ml-[-10px] text-cream transition duration-300 hover:scale-105"
         >
-          <Image
-            src={logo}
-            alt="logo"
-            width={140}
-            height={140}
-            className="ml-[-20px]"
-          />
+          <Image src={logo} alt="logo" width={140} height={140} />
           <div className="font-semibold tracking-tight text-2xl hidden md:block">
             <p className="ml-[-20px]">Homestead Careers</p>
           </div>
@@ -144,7 +138,7 @@ const Navbar = () => {
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="text-cream font-semibold"
             >
-              <div className="text-3xl">
+              <div className="text-3xl pt-2">
                 <RxHamburgerMenu />
               </div>
             </button>
