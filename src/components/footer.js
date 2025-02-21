@@ -6,8 +6,15 @@ const navigation = {
     { name: "Get Started", href: "/" },
     { name: "Benefits", href: "/" },
   ],
+
   positions: [{ name: "Careers", href: "/postings" }],
+
   apply: [{ name: "Application", href: "/postings" }],
+
+  legal: [
+    { name: "Privacy", href: "" },
+    { name: "Terms", href: "" },
+  ],
 };
 
 export default function Footer() {
@@ -17,7 +24,7 @@ export default function Footer() {
       aria-labelledby="footer-heading"
     >
       <div className="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-20 opacity-100">
-        <div className="xl:grid xl:grid-cols-3 xl:gap-8">
+        <div className="xl:grid grid-cols-3 xl:gap-8">
           {/* Logo and Title */}
           <Link
             href="/"
@@ -29,7 +36,7 @@ export default function Footer() {
           </Link>
 
           {/* Navigation Links */}
-          <div className="mt-16 grid grid-cols-2 gap-8 sm:grid-cols-2 xl:grid-cols-3 xl:col-span-2 xl:mt-0">
+          <div className="mt-16 grid grid-cols-2 gap-8 xl:grid-cols-4 xl:col-span-2 xl:mt-0">
             {/* About Section */}
             <div>
               <h3 className="text-md font-semibold leading-6 text-cream">
@@ -69,12 +76,30 @@ export default function Footer() {
             </div>
 
             {/* Apply Section - Moves to the bottom on mobile screens */}
-            <div className="col-span-2 sm:col-span-2 xl:col-span-1">
+            <div>
               <h3 className="text-md font-semibold leading-6 text-cream">
                 Apply
               </h3>
               <ul role="list" className="mt-6 space-y-4">
                 {navigation.apply.map((item) => (
+                  <li key={item.name}>
+                    <Link
+                      href={item.href}
+                      className="text-md leading-6 text-cream-white hover:text-gray-100"
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            {/* Legal Section */}
+            <div>
+              <h3 className="text-md font-semibold leading-6 text-cream">
+                Legal
+              </h3>
+              <ul role="list" className="mt-6 space-y-4">
+                {navigation.legal.map((item) => (
                   <li key={item.name}>
                     <Link
                       href={item.href}
