@@ -63,7 +63,7 @@ export default function NewPosting() {
         approved: false,
         userId: user.uid,
       });
-      alert("Job posted successfully!");
+      window.location.href = "/profile";
       // Reset form fields
       setTitle("");
       setDescription("");
