@@ -70,24 +70,24 @@ export default function Home() {
           <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 text-center gap-12">
             <div>
               <h3 className="text-5xl font-bold text-dark-green flex flex-row justify-center">
-                <SpeedoMeter value={1000} />
+                <SpeedoMeter value={200} />
                 <div>+</div>
               </h3>
               <p className="text-lg text-gray-700">Students Found Jobs</p>
             </div>
             <div>
               <h3 className="text-5xl font-bold text-dark-green flex flex-row justify-center">
-                <SpeedoMeter value={500} />
+                <SpeedoMeter value={100} />
                 <div>+</div>
               </h3>
               <p className="text-lg text-gray-700">Employers Registered</p>
             </div>
             <div>
               <h3 className="text-5xl font-bold text-dark-green flex flex-row justify-center">
-                <SpeedoMeter value={200} />
+                <SpeedoMeter value={50} />
                 <div>+</div>
               </h3>
-              <p className="text-lg text-gray-700">Internship Opportunities</p>
+              <p className="text-lg text-gray-700">Job Opportunities</p>
             </div>
           </div>
         </section>
