@@ -48,7 +48,6 @@ export default function Admin() {
           approvedSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
         );
 
-
         setLoading(false);
       } catch (error) {
         console.error("Error fetching job postings: ", error);
@@ -72,6 +71,7 @@ export default function Admin() {
       setUnapprovedPostings(
         unapprovedPostings.filter((posting) => posting.id !== id)
       );
+      window.location.reload();
     } catch (error) {
       console.error("Error approving posting: ", error);
     }
@@ -85,6 +85,7 @@ export default function Admin() {
       );
       setAllPostings(allPostings.filter((posting) => posting.id !== id));
       setSelectedJob(null);
+      window.location.reload();
     } catch (error) {
       console.error("Error deleting posting: ", error);
     }
@@ -204,6 +205,12 @@ export default function Admin() {
                     Delete
                   </button>
                 </div>
+                <p className="text-white">
+                  Select a job to view details Select a job to view details
+                  Select a job to view details Select a job to view details
+                  Select a job to view details Select a job to view details
+                  Select a job to view details Select a job to view details
+                </p>
               </>
             ) : (
               <div>
