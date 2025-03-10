@@ -70,6 +70,7 @@ export default function Register() {
                 </option>
                 <option value="student">Student</option>
                 <option value="employer">Employer</option>
+                <option value="admin">Admin</option>
               </select>
             </div>
             {role === "student" && (
