@@ -1,6 +1,6 @@
 # Homestead Careers
 
-**Homestead Careers** is a job posting platform built for **Homestead High School**. This project was developed for the **2025 FBLA Web Coding & Development Competition** and didn't pass prejudge.
+**Homestead Careers** is a job posting platform built for **Homestead High School**. This project was developed for the **2025 FBLA Web Coding & Development Competition** and didn't pass prejudged.
 
 ## About the Project
 
@@ -23,4 +23,4 @@ This repository, **fbla-web-dev**, contains the full source code for the project
 
 ---
 
-Made for the 2025 FBLA Web Coding & Development Competition - didn't pass prejudge
+Made for the 2025 FBLA Web Coding & Development Competition - didn't pass prejudged
